@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+{% block body %}
+
+<h1> {{ titulo }}</h1>
+{{ msg }}
+<a href="#" class="btn btn-primary"> +Adicionar </a>
+
+
+
+<button id="myBtn">Abrir Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id="modal-body">
+ 
+        <h1> Testando </h1>
+
+        {{ form(form) }}
+        {{ form(form_editar) }}
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+    }
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+$('.btn-action').click(function(){
+    var url = $(this).data("url"); 
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        success: function(res) {
+
+            // get the ajax response data
+            var data = res.body;
+
+            // update modal content here
+            // you may want to format data or 
+            // update other modal elements here too
+            $('.modal-body').text(data);
+
+            // show modal
+            $('#myModal').modal('show');
+
+        },
+        error:function(request, status, error) {
+            console.log("ajax call went wrong:" + request.responseText);
+        }
+    });
+});
+
+</script>
+
+
+<table class='table'>
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Descrição</td>
+            <td>Contagem</td>
+            <td>Ações</td>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for categoria in categorias %}
+        <tr>
+            <td> {{ categoria.id }} </td>
+            <td> {{ categoria.descricaocategoria }} </td>
+            {# <td>{{ contagens[categoria.id] }} </td>
+           
+            <td>
+                <a href="{{ path('categoria_editar', {id:categoria.id} )}}" class="btn btn-primary">Editar</a>
+                <a href="{{ path('categoria_excluir', {id:categoria.id} )}}" class="btn btn-primary">Excluir</a>
+            </td> #}
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+
+
+
+
+{% endblock %}
