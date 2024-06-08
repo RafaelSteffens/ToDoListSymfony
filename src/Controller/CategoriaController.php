@@ -24,7 +24,7 @@ class CategoriaController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index (CategoriaService $categoriaService, Request $request) : Response
     {
-   
+    //Incluindo primeira modificação no código
 
         $msg="";
         
