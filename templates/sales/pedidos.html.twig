@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pedidos!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Lista de Pedidos✅</h1>
+
+<table class="table";
+    <thead>
+        <tr>
+            <td> Nome </td>
+            <td> Endereco </td>
+            <td> Pagamento </td>
+            
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for venda in vendas %}
+            <tr>
+                <td> {{ venda.nome }} </td>
+                <td> {{ venda.endereco }}  </td>
+                <td> {{ venda.pagamento }}
+                
+
+            </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+{% endblock %}

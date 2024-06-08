@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SalesController!{% endblock %}
+
+{% block body %}
+<br>
+<a class="btn btn-primary" href="{{ path('app_login') }}"> Logar </a>
+<br>
+<div class="example-wrapper">
+    <h1>Lista de Produtos✅</h1>
+
+<table class="table";
+    <thead>
+        <tr>
+            <td>  Produto </td>
+            <td> Valor </td>
+            <td> Categoria </td>
+            <td> ... <td>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for produto in produtos %}
+            <tr>
+                <td> {{ produto.nomeproduto }} </td>
+                <td> {{ produto.valor }}  </td>
+                <td> {{ produto.categoria.descricaocategoria }}
+                <td>
+                    <a href="{{ path('app_comprar', {id:produto.id}) }}" class="btn btn-primary"> Comprar </a>
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+{% endblock %}
